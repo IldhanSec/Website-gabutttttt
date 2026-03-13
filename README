@@ -1,0 +1,2031 @@
+
+## Catatan C
+# 📚 DOKUMENTASI LENGKAP BAHASA C
+## Untuk Pemula Sampai Mahir
+### Bisa Langsung Dicopy ke VSCode
+
+---
+
+# 📋 DAFTAR ISI
+1. [Fundamental C](#1-fundamental-c)
+2. [Tipe Data](#2-tipe-data)
+3. [Operator](#3-operator)
+4. [Array](#4-array)
+5. [Multi-dimensional Array](#5-multi-dimensional-array)
+6. [Pointer](#6-pointer)
+7. [String](#7-string)
+8. [Library C Lengkap](#8-library-c-lengkap)
+9. [Memory Management](#9-memory-management)
+10. [Error dan Debugging](#10-error-dan-debugging)
+11. [Tips dan Trik](#11-tips-dan-trik)
+12. [Contoh Program Lengkap](#12-contoh-program-lengkap)
+
+---
+
+# 1. FUNDAMENTAL C
+
+## 📌 APA ITU C?
+C adalah bahasa pemrograman tingkat menengah yang dikembangkan oleh Dennis Ritchie di Bell Labs tahun 1972. C menjadi dasar banyak bahasa modern seperti C++, Java, Python, dll.
+
+## 🏗️ STRUKTUR PROGRAM C
+
+```c
+/**
+ * ============================================
+ * STRUKTUR DASAR PROGRAM C
+ * ============================================
+ */
+
+// 1. PREPROCESSOR DIRECTIVE
+// #include untuk memasukkan library
+#include <stdio.h>   // Standard Input Output
+#include <stdlib.h>  // Standard Library
+
+// 2. KONSTANTA (const) dan MACRO (#define)
+#define PI 3.14159           // Macro konstanta
+#define MAX_SISWA 100        // Macro batas maksimal
+const double GRAVITASI = 9.8; // Const keyword
+
+// 3. FUNGSI UTAMA (WAJIB ADA!)
+// int: tipe return (mengembalikan integer)
+// main: nama fungsi
+// void: tidak menerima parameter (bisa juga kosong)
+int main(void) {
+    
+    // 4. BADAN PROGRAM
+    printf("Hello, World!\n");
+    
+    // 5. RETURN
+    // 0 menandakan program sukses
+    return 0;
+}
+```
+
+## 🔍 PENJELASAN KOMPONEN
+
+| **Komponen** | **Penjelasan** | **Contoh** |
+|-------------|----------------|------------|
+| `#include` | Memasukkan library | `#include <stdio.h>` |
+| `int main()` | Fungsi utama | Program dimulai dari sini |
+| `{}` | Blok kode | Mengelompokkan statement |
+| `;` | Terminator | Akhir setiap statement |
+| `//` | Komentar 1 baris | Tidak dieksekusi |
+| `/* */` | Komentar banyak baris | Untuk dokumentasi |
+
+---
+
+# 2. TIPE DATA
+
+## 📊 TIPE DATA PRIMITIF
+
+```c
+#include <stdio.h>
+#include <limits.h>
+#include <float.h>
+
+int main() {
+    /**
+     * ============================================
+     * TIPE DATA INTEGER (BILANGAN BULAT)
+     * ============================================
+     */
+    
+    // char: 1 byte (-128 s/d 127 atau 0 s/d 255)
+    char karakter = 'A';        // Untuk karakter
+    signed char c_neg = -10;    // Bisa negatif
+    unsigned char c_pos = 200;   // Hanya positif (0-255)
+    
+    // short: 2 byte (-32,768 s/d 32,767)
+    short int nilai_short = 1000;
+    unsigned short int u_short = 60000;
+    
+    // int: 4 byte (-2,147,483,648 s/d 2,147,483,647)
+    int umur = 17;
+    unsigned int positif = 4000000000;
+    
+    // long: 4/8 byte (tergantung sistem)
+    long int populasi = 7800000000;
+    long long int sangat_besar = 9223372036854775807;
+    
+    /**
+     * ============================================
+     * TIPE DATA FLOAT (BILANGAN DESIMAL)
+     * ============================================
+     */
+    
+    // float: 4 byte, presisi 6-7 digit desimal
+    float ipk = 3.75f;           // Perlu akhiran f
+    
+    // double: 8 byte, presisi 15-16 digit desimal
+    double phi = 3.141592653589793;
+    
+    // long double: 10/16 byte, presisi lebih tinggi
+    long double sangat_presisi = 3.14159265358979323846L;
+    
+    /**
+     * ============================================
+     * TIPE DATA VOID
+     * ============================================
+     */
+    // void: tipe khusus untuk:
+    // 1. Fungsi yang tidak return nilai
+    // 2. Pointer generic (void*)
+    
+    /**
+     * ============================================
+     * MENAMPILKAN UKURAN TIPE DATA
+     * ============================================
+     */
+    printf("=== UKURAN TIPE DATA (dalam byte) ===\n");
+    printf("char      : %lu byte\n", sizeof(char));
+    printf("short     : %lu byte\n", sizeof(short));
+    printf("int       : %lu byte\n", sizeof(int));
+    printf("long      : %lu byte\n", sizeof(long));
+    printf("long long : %lu byte\n", sizeof(long long));
+    printf("float     : %lu byte\n", sizeof(float));
+    printf("double    : %lu byte\n", sizeof(double));
+    printf("long double: %lu byte\n", sizeof(long double));
+    
+    /**
+     * ============================================
+     * BATAS-BATAS TIPE DATA
+     * ============================================
+     */
+    printf("\n=== BATAS TIPE DATA ===\n");
+    printf("CHAR_MIN    : %d\n", CHAR_MIN);
+    printf("CHAR_MAX    : %d\n", CHAR_MAX);
+    printf("INT_MIN     : %d\n", INT_MIN);
+    printf("INT_MAX     : %d\n", INT_MAX);
+    printf("UINT_MAX    : %u\n", UINT_MAX);
+    printf("FLT_MIN     : %e\n", FLT_MIN);
+    printf("FLT_MAX     : %e\n", FLT_MAX);
+    
+    return 0;
+}
+```
+
+## 📋 TABEL TIPE DATA LENGKAP
+
+| **Tipe** | **Format Specifier** | **Ukuran** | **Range** |
+|---------|---------------------|-----------|-----------|
+| char | `%c` | 1 byte | -128 s/d 127 |
+| unsigned char | `%c` atau `%hhu` | 1 byte | 0 s/d 255 |
+| short | `%hd` | 2 byte | -32,768 s/d 32,767 |
+| unsigned short | `%hu` | 2 byte | 0 s/d 65,535 |
+| int | `%d` | 4 byte | -2,147,483,648 s/d 2,147,483,647 |
+| unsigned int | `%u` | 4 byte | 0 s/d 4,294,967,295 |
+| long | `%ld` | 4/8 byte | Tergantung sistem |
+| long long | `%lld` | 8 byte | -9.2e18 s/d 9.2e18 |
+| float | `%f` | 4 byte | 1.2e-38 s/d 3.4e38 |
+| double | `%lf` | 8 byte | 2.3e-308 s/d 1.7e308 |
+| long double | `%Lf` | 10/16 byte | Lebih besar |
+
+---
+
+# 3. OPERATOR
+
+## 🧮 OPERATOR DI C
+
+```c
+#include <stdio.h>
+
+int main() {
+    /**
+     * ============================================
+     * 1. OPERATOR ARITMATIKA
+     * ============================================
+     */
+    printf("=== OPERATOR ARITMATIKA ===\n");
+    
+    int a = 10, b = 3;
+    
+    printf("%d + %d = %d\n", a, b, a + b);  // Penjumlahan
+    printf("%d - %d = %d\n", a, b, a - b);  // Pengurangan
+    printf("%d * %d = %d\n", a, b, a * b);  // Perkalian
+    printf("%d / %d = %d\n", a, b, a / b);  // Pembagian integer
+    printf("%d %% %d = %d\n", a, b, a % b); // Modulus (sisa bagi)
+    
+    // Pembagian float
+    float x = 10.0, y = 3.0;
+    printf("%.1f / %.1f = %.2f\n", x, y, x / y);
+    
+    /**
+     * ============================================
+     * 2. OPERATOR PENUGASAN
+     * ============================================
+     */
+    printf("\n=== OPERATOR PENUGASAN ===\n");
+    
+    int c = 10;
+    printf("c = %d\n", c);
+    
+    c += 5;  // c = c + 5
+    printf("c += 5  → %d\n", c);
+    
+    c -= 3;  // c = c - 3
+    printf("c -= 3  → %d\n", c);
+    
+    c *= 2;  // c = c * 2
+    printf("c *= 2  → %d\n", c);
+    
+    c /= 4;  // c = c / 4
+    printf("c /= 4  → %d\n", c);
+    
+    c %= 3;  // c = c % 3
+    printf("c %%= 3  → %d\n", c);
+    
+    /**
+     * ============================================
+     * 3. OPERATOR INCREMENT/DECREMENT
+     * ============================================
+     */
+    printf("\n=== INCREMENT/DECREMENT ===\n");
+    
+    int i = 5;
+    printf("i = %d\n", i);
+    printf("i++ = %d (post-increment)\n", i++);  // Cetak dulu, baru tambah
+    printf("Sekarang i = %d\n", i);
+    
+    i = 5;
+    printf("++i = %d (pre-increment)\n", ++i);    // Tambah dulu, baru cetak
+    
+    /**
+     * ============================================
+     * 4. OPERATOR PEMBANDING (RELATIONAL)
+     * ============================================
+     */
+    printf("\n=== OPERATOR PEMBANDING ===\n");
+    
+    int p = 10, q = 20;
+    printf("p = %d, q = %d\n", p, q);
+    printf("p == q : %d\n", p == q);  // Sama dengan
+    printf("p != q : %d\n", p != q);  // Tidak sama
+    printf("p < q  : %d\n", p < q);   // Kurang dari
+    printf("p > q  : %d\n", p > q);   // Lebih dari
+    printf("p <= q : %d\n", p <= q);  // Kurang sama
+    printf("p >= q : %d\n", p >= q);  // Lebih sama
+    
+    /**
+     * ============================================
+     * 5. OPERATOR LOGIKA
+     * ============================================
+     */
+    printf("\n=== OPERATOR LOGIKA ===\n");
+    
+    int u = 1, v = 0;
+    printf("u = %d, v = %d\n", u, v);
+    printf("u && v : %d (AND)\n", u && v);   // Keduanya harus 1
+    printf("u || v : %d (OR)\n", u || v);    // Salah satu 1
+    printf("!u     : %d (NOT u)\n", !u);     // Kebalikan
+    printf("!v     : %d (NOT v)\n", !v);
+    
+    /**
+     * ============================================
+     * 6. OPERATOR BITWISE
+     * ============================================
+     */
+    printf("\n=== OPERATOR BITWISE ===\n");
+    
+    unsigned char m = 5;   // 00000101
+    unsigned char n = 3;   // 00000011
+    
+    printf("m = %d (biner: 00000101)\n", m);
+    printf("n = %d (biner: 00000011)\n", n);
+    printf("m & n  = %d (AND bitwise)\n", m & n);   // 00000001 = 1
+    printf("m | n  = %d (OR bitwise)\n", m | n);    // 00000111 = 7
+    printf("m ^ n  = %d (XOR bitwise)\n", m ^ n);   // 00000110 = 6
+    printf("~m     = %d (NOT bitwise)\n", (unsigned char)~m);  // 11111010 = 250
+    printf("m << 1 = %d (shift kiri)\n", m << 1);   // 00001010 = 10
+    printf("m >> 1 = %d (shift kanan)\n", m >> 1);  // 00000010 = 2
+    
+    /**
+     * ============================================
+     * 7. OPERATOR SIZEOF
+     * ============================================
+     */
+    printf("\n=== OPERATOR SIZEOF ===\n");
+    
+    int arr[10];
+    printf("sizeof(int)      : %lu byte\n", sizeof(int));
+    printf("sizeof(arr)      : %lu byte\n", sizeof(arr));
+    printf("Jumlah elemen arr: %lu\n", sizeof(arr) / sizeof(arr[0]));
+    
+    return 0;
+}
+```
+
+---
+
+# 4. ARRAY
+
+## 📦 ARRAY 1 DIMENSI
+
+```c
+#include <stdio.h>
+
+int main() {
+    /**
+     * ============================================
+     * ARRAY 1 DIMENSI
+     * ============================================
+     * Array = kumpulan data dengan tipe yang sama
+     * Indeks array selalu dimulai dari 0
+     * Ukuran array harus diketahui saat kompilasi
+     */
+    
+    // CARA 1: Deklarasi + inisialisasi
+    int nilai[5] = {85, 90, 78, 88, 92};
+    
+    // CARA 2: Deklarasi dulu, isi kemudian
+    int angka[3];
+    angka[0] = 10;
+    angka[1] = 20;
+    angka[2] = 30;
+    
+    // CARA 3: Tanpa ukuran (otomatis)
+    int fibo[] = {1, 1, 2, 3, 5, 8, 13};
+    int panjang = sizeof(fibo) / sizeof(fibo[0]);
+    
+    // CARA 4: Sebagian diisi (sisanya 0)
+    int zero[10] = {1, 2, 3};  // index 3-9 = 0
+    
+    // Menampilkan array
+    printf("=== ARRAY NILAI ===\n");
+    for(int i = 0; i < 5; i++) {
+        printf("nilai[%d] = %d\n", i, nilai[i]);
+    }
+    
+    printf("\n=== ARRAY FIBONACCI ===\n");
+    for(int i = 0; i < panjang; i++) {
+        printf("%d ", fibo[i]);
+    }
+    printf("\n");
+    
+    /**
+     * ============================================
+     * INPUT ARRAY DARI USER
+     * ============================================
+     */
+    int input[5];
+    printf("\nMasukkan 5 angka:\n");
+    for(int i = 0; i < 5; i++) {
+        printf("input[%d] = ", i);
+        scanf("%d", &input[i]);
+    }
+    
+    printf("Array yang diinput: ");
+    for(int i = 0; i < 5; i++) {
+        printf("%d ", input[i]);
+    }
+    printf("\n");
+    
+    /**
+     * ============================================
+     * ARRAY SEBAGAI PARAMETER FUNGSI
+     * ============================================
+     * Array dikirim sebagai pointer (alamat)
+     * Perubahan di fungsi akan mengubah array asli
+     */
+    
+    return 0;
+}
+
+// Fungsi dengan parameter array
+void cetak_array(int arr[], int n) {
+    for(int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void double_array(int arr[], int n) {
+    for(int i = 0; i < n; i++) {
+        arr[i] *= 2;  // Mengubah array asli
+    }
+}
+```
+
+---
+
+# 5. MULTI-DIMENSIONAL ARRAY
+
+## 📊 ARRAY 2 DIMENSI (MATRIKS)
+
+```c
+#include <stdio.h>
+
+int main() {
+    /**
+     * ============================================
+     * ARRAY 2 DIMENSI
+     * ============================================
+     * Format: tipe nama[baris][kolom]
+     * Baris: jumlah baris (dimensi pertama)
+     * Kolom: jumlah kolom (dimensi kedua)
+     */
+    
+    // CARA 1: Inisialisasi langsung
+    int matriks[3][4] = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
+    
+    // CARA 2: Inisialisasi sebagian
+    int matriks2[2][3] = {
+        {1, 2},     // baris 0: 1,2,0
+        {4, 5, 6}   // baris 1: 4,5,6
+    };
+    
+    // CARA 3: Input dari user
+    int user[2][2];
+    
+    // Menampilkan matriks
+    printf("=== MATRIKS 3x4 ===\n");
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 4; j++) {
+            printf("%3d ", matriks[i][j]);
+        }
+        printf("\n");
+    }
+    
+    // Input matriks dari user
+    printf("\nInput matriks 2x2:\n");
+    for(int i = 0; i < 2; i++) {
+        for(int j = 0; j < 2; j++) {
+            printf("matriks[%d][%d] = ", i, j);
+            scanf("%d", &user[i][j]);
+        }
+    }
+    
+    // Tampilkan hasil input
+    printf("\nHasil input:\n");
+    for(int i = 0; i < 2; i++) {
+        for(int j = 0; j < 2; j++) {
+            printf("%3d ", user[i][j]);
+        }
+        printf("\n");
+    }
+    
+    /**
+     * ============================================
+     * OPERASI MATRIKS
+     * ============================================
+     */
+    
+    // Penjumlahan matriks
+    int A[2][2] = {{1,2}, {3,4}};
+    int B[2][2] = {{5,6}, {7,8}};
+    int C[2][2];
+    
+    for(int i = 0; i < 2; i++) {
+        for(int j = 0; j < 2; j++) {
+            C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+    
+    printf("\n=== HASIL PENJUMLAHAN ===\n");
+    for(int i = 0; i < 2; i++) {
+        for(int j = 0; j < 2; j++) {
+            printf("%3d ", C[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+```
+
+## 📚 ARRAY 3 DIMENSI
+
+```c
+#include <stdio.h>
+
+int main() {
+    /**
+     * ============================================
+     * ARRAY 3 DIMENSI
+     * ============================================
+     * Format: tipe nama[layer][baris][kolom]
+     * Analogi: buku (layer) → halaman (baris) → kata (kolom)
+     */
+    
+    // Array 3D: 2 layer, 3 baris, 4 kolom
+    int kubus[2][3][4] = {
+        {  // Layer 0
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12}
+        },
+        {  // Layer 1
+            {13, 14, 15, 16},
+            {17, 18, 19, 20},
+            {21, 22, 23, 24}
+        }
+    };
+    
+    // Menampilkan array 3D
+    printf("=== ARRAY 3 DIMENSI ===\n");
+    for(int layer = 0; layer < 2; layer++) {
+        printf("\nLayer %d:\n", layer);
+        for(int baris = 0; baris < 3; baris++) {
+            for(int kolom = 0; kolom < 4; kolom++) {
+                printf("%3d ", kubus[layer][baris][kolom]);
+            }
+            printf("\n");
+        }
+    }
+    
+    // Mengakses elemen tertentu
+    printf("\nkubus[1][2][3] = %d\n", kubus[1][2][3]);  // 24
+    
+    return 0;
+}
+```
+
+---
+
+# 6. POINTER
+
+## 📍 POINTER UNTUK PEMULA
+
+```c
+#include <stdio.h>
+
+int main() {
+    /**
+     * ============================================
+     * APA ITU POINTER?
+     * ============================================
+     * Pointer = variabel yang menyimpan ALAMAT MEMORI
+     * Bukan menyimpan NILAI, tapi menyimpan ALAMAT
+     * 
+     * Analogi:
+     * - Variabel biasa: rumah (isi rumah)
+     * - Pointer: alamat rumah (bukan isinya)
+     */
+    
+    /**
+     * ============================================
+     * OPERATOR PENTING POINTER
+     * ============================================
+     * & (address-of)  : mengambil alamat variabel
+     * * (dereference) : mengambil nilai dari alamat
+     */
+    
+    // Deklarasi variabel biasa
+    int umur = 17;
+    
+    // Deklarasi pointer ke int
+    int *ptr_umur;
+    
+    // Pointer menyimpan alamat umur
+    ptr_umur = &umur;
+    
+    printf("=== DASAR POINTER ===\n");
+    printf("Nilai umur        : %d\n", umur);
+    printf("Alamat umur       : %p\n", &umur);
+    printf("Nilai ptr_umur    : %p (alamat yang disimpan)\n", ptr_umur);
+    printf("Nilai *ptr_umur   : %d (nilai di alamat tersebut)\n", *ptr_umur);
+    
+    // Mengubah nilai melalui pointer
+    *ptr_umur = 20;
+    printf("\nSetelah *ptr_umur = 20:\n");
+    printf("Nilai umur sekarang: %d\n", umur);
+    
+    /**
+     * ============================================
+     * POINTER KE BERBAGAI TIPE DATA
+     * ============================================
+     */
+    printf("\n=== POINTER KE BERBAGAI TIPE ===\n");
+    
+    int a = 10;
+    float b = 3.14;
+    char c = 'Z';
+    
+    int *p_int = &a;
+    float *p_float = &b;
+    char *p_char = &c;
+    
+    printf("int pointer   : %p -> %d\n", p_int, *p_int);
+    printf("float pointer : %p -> %.2f\n", p_float, *p_float);
+    printf("char pointer  : %p -> %c\n", p_char, *p_char);
+    
+    /**
+     * ============================================
+     * POINTER ARITMATIKA
+     * ============================================
+     * Pointer bisa ditambah/dikurang
+     * Nilai penambahan = ukuran tipe data
+     */
+    printf("\n=== POINTER ARITMATIKA ===\n");
+    
+    int arr[] = {10, 20, 30, 40, 50};
+    int *ptr = arr;  // Sama dengan &arr[0]
+    
+    printf("arr[0] = %d, alamat: %p\n", *ptr, ptr);
+    
+    ptr++;  // Geser ke elemen berikutnya
+    printf("Setelah ptr++:\n");
+    printf("arr[1] = %d, alamat: %p\n", *ptr, ptr);
+    
+    ptr = ptr + 2;  // Geser 2 langkah
+    printf("Setelah ptr + 2:\n");
+    printf("arr[3] = %d, alamat: %p\n", *ptr, ptr);
+    
+    /**
+     * ============================================
+     * POINTER NULL
+     * ============================================
+     * Pointer yang tidak menunjuk ke mana-mana
+     * Selalu inisialisasi pointer dengan NULL
+     * Jangan di-dereference!
+     */
+    int *safe_ptr = NULL;
+    
+    if (safe_ptr == NULL) {
+        printf("\nPointer aman (NULL)\n");
+    }
+    
+    // ❌ JANGAN LAKUKAN INI!
+    // *safe_ptr = 10;  // SEGMENTATION FAULT!
+    
+    return 0;
+}
+```
+
+## 📍 POINTER MENENGAH
+
+```c
+#include <stdio.h>
+
+/**
+ * ============================================
+ * POINTER SEBAGAI PARAMETER FUNGSI
+ * ============================================
+ * Pass by reference: mengubah nilai asli
+ */
+void tukar(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void kali_dua(int *x) {
+    *x *= 2;
+}
+
+int main() {
+    /**
+     * ============================================
+     * POINTER DAN ARRAY
+     * ============================================
+     */
+    printf("=== POINTER DAN ARRAY ===\n");
+    
+    int angka[] = {100, 200, 300, 400, 500};
+    int *p = angka;  // p menunjuk ke elemen pertama
+    
+    // Cara mengakses array dengan pointer
+    printf("angka[0] = %d\n", angka[0]);
+    printf("*p       = %d\n", *p);
+    printf("*(p+2)   = %d\n", *(p+2));  // angka[2]
+    printf("p[3]     = %d\n", p[3]);    // Bisa juga pake []
+    
+    // Loop dengan pointer
+    printf("\nLoop dengan pointer:\n");
+    for(p = angka; p < angka + 5; p++) {
+        printf("%d ", *p);
+    }
+    printf("\n");
+    
+    /**
+     * ============================================
+     * PASS BY REFERENCE
+     * ============================================
+     */
+    printf("\n=== PASS BY REFERENCE ===\n");
+    
+    int x = 5, y = 10;
+    printf("Sebelum tukar: x = %d, y = %d\n", x, y);
+    tukar(&x, &y);
+    printf("Setelah tukar : x = %d, y = %d\n", x, y);
+    
+    int z = 7;
+    printf("z = %d\n", z);
+    kali_dua(&z);
+    printf("Setelah kali_dua: %d\n", z);
+    
+    /**
+     * ============================================
+     * POINTER KE POINTER (DOUBLE POINTER)
+     * ============================================
+     */
+    printf("\n=== DOUBLE POINTER ===\n");
+    
+    int nilai = 100;
+    int *ptr1 = &nilai;
+    int **ptr2 = &ptr1;
+    int ***ptr3 = &ptr2;
+    
+    printf("nilai      : %d\n", nilai);
+    printf("*ptr1      : %d\n", *ptr1);
+    printf("**ptr2     : %d\n", **ptr2);
+    printf("***ptr3    : %d\n", ***ptr3);
+    
+    return 0;
+}
+```
+
+## 📍 POINTER MAHIR
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ * ============================================
+ * POINTER KE FUNGSI (FUNCTION POINTER)
+ * ============================================
+ */
+int tambah(int a, int b) { return a + b; }
+int kurang(int a, int b) { return a - b; }
+int kali(int a, int b) { return a * b; }
+
+int operasi(int a, int b, int (*op)(int, int)) {
+    return op(a, b);
+}
+
+/**
+ * ============================================
+ * POINTER KE ARRAY
+ * ============================================
+ */
+void pointer_ke_array() {
+    printf("\n=== POINTER KE ARRAY ===\n");
+    
+    int matrix[3][4] = {
+        {1,2,3,4},
+        {5,6,7,8},
+        {9,10,11,12}
+    };
+    
+    // Pointer ke array yang punya 4 elemen
+    int (*ptr)[4] = matrix;
+    
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 4; j++) {
+            printf("%3d ", ptr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+/**
+ * ============================================
+ * ARRAY OF POINTERS
+ * ============================================
+ */
+void array_of_pointers() {
+    printf("\n=== ARRAY OF POINTERS ===\n");
+    
+    // Array of pointers ke string
+    char *nama_bulan[] = {
+        "Januari", "Februari", "Maret", "April",
+        "Mei", "Juni", "Juli", "Agustus",
+        "September", "Oktober", "November", "Desember"
+    };
+    
+    for(int i = 0; i < 12; i++) {
+        printf("Bulan %2d: %s\n", i+1, nama_bulan[i]);
+    }
+    
+    // Array of pointers ke integer
+    int a=10, b=20, c=30, d=40, e=50;
+    int *arr_ptr[5] = {&a, &b, &c, &d, &e};
+    
+    printf("\nNilai melalui pointer:\n");
+    for(int i = 0; i < 5; i++) {
+        printf("%d ", *arr_ptr[i]);
+    }
+    printf("\n");
+}
+
+/**
+ * ============================================
+ * POINTER VOID (GENERIC POINTER)
+ * ============================================
+ */
+void void_pointer() {
+    printf("\n=== VOID POINTER ===\n");
+    
+    int angka = 42;
+    float desimal = 3.14;
+    char huruf = 'X';
+    
+    void *ptr;  // Bisa menunjuk ke tipe apapun
+    
+    ptr = &angka;
+    printf("Sebagai int : %d\n", *(int*)ptr);
+    
+    ptr = &desimal;
+    printf("Sebagai float: %.2f\n", *(float*)ptr);
+    
+    ptr = &huruf;
+    printf("Sebagai char : %c\n", *(char*)ptr);
+}
+
+int main() {
+    /**
+     * ============================================
+     * FUNCTION POINTER
+     * ============================================
+     */
+    printf("=== FUNCTION POINTER ===\n");
+    
+    int hasil;
+    
+    hasil = operasi(10, 5, tambah);
+    printf("10 + 5 = %d\n", hasil);
+    
+    hasil = operasi(10, 5, kurang);
+    printf("10 - 5 = %d\n", hasil);
+    
+    hasil = operasi(10, 5, kali);
+    printf("10 * 5 = %d\n", hasil);
+    
+    pointer_ke_array();
+    array_of_pointers();
+    void_pointer();
+    
+    return 0;
+}
+```
+
+---
+
+# 7. STRING
+
+## 📝 STRING DI C
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    /**
+     * ============================================
+     * APA ITU STRING?
+     * ============================================
+     * String = array of char yang diakhiri '\0'
+     * '\0' = null terminator (penanda akhir string)
+     */
+    
+    // CARA 1: Inisialisasi langsung
+    char str1[] = "Hello";  // Otomatis: {'H','e','l','l','o','\0'}
+    
+    // CARA 2: Array of char
+    char str2[6] = {'H', 'e', 'l', 'l', 'o', '\0'};
+    
+    // CARA 3: Pointer (read-only)
+    char *str3 = "World";
+    
+    // CARA 4: String kosong
+    char str4[50] = "";
+    
+    printf("str1: %s\n", str1);
+    printf("str2: %s\n", str2);
+    printf("str3: %s\n", str3);
+    
+    /**
+     * ============================================
+     * INPUT STRING
+     * ============================================
+     */
+    char nama[50];
+    char alamat[100];
+    
+    printf("\n=== INPUT STRING ===\n");
+    
+    // scanf("%s") - hanya baca sampai spasi
+    printf("Nama (scanf): ");
+    scanf("%s", nama);  // ❌ TIDAK AMAN, rawan buffer overflow
+    printf("Halo %s\n", nama);
+    
+    // Bersihkan buffer
+    while(getchar() != '\n');
+    
+    // fgets() - AMAN, bisa baca spasi
+    printf("Alamat (fgets): ");
+    fgets(alamat, sizeof(alamat), stdin);
+    
+    // Hapus newline di akhir
+    alamat[strcspn(alamat, "\n")] = 0;
+    
+    printf("Alamat: %s\n", alamat);
+    
+    /**
+     * ============================================
+     * FUNGSI-FUNGSI STRING.H
+     * ============================================
+     */
+    printf("\n=== MANIPULASI STRING ===\n");
+    
+    char s1[50] = "Belajar ";
+    char s2[] = "C Programming";
+    char s3[50];
+    
+    // strlen() - panjang string
+    printf("Panjang s1: %lu\n", strlen(s1));
+    printf("Panjang s2: %lu\n", strlen(s2));
+    
+    // strcpy() - copy string
+    strcpy(s3, s1);  // s3 = "Belajar "
+    printf("s3: %s\n", s3);
+    
+    // strcat() - gabung string
+    strcat(s1, s2);  // s1 = "Belajar C Programming"
+    printf("s1 setelah digabung: %s\n", s1);
+    
+    // strcmp() - bandingkan string
+    if(strcmp(s1, s2) == 0) {
+        printf("String sama\n");
+    } else {
+        printf("String berbeda\n");
+    }
+    
+    // strchr() - cari karakter
+    char *pos = strchr(s1, 'C');
+    if(pos != NULL) {
+        printf("Karakter 'C' ditemukan di posisi %ld\n", pos - s1);
+    }
+    
+    // strstr() - cari substring
+    pos = strstr(s1, "Program");
+    if(pos != NULL) {
+        printf("'Program' ditemukan: %s\n", pos);
+    }
+    
+    /**
+     * ============================================
+     * KONVERSI STRING
+     * ============================================
+     */
+    printf("\n=== KONVERSI STRING ===\n");
+    
+    char angka_str[] = "123";
+    char desimal_str[] = "45.67";
+    
+    int angka = atoi(angka_str);     // String → int
+    double desimal = atof(desimal_str); // String → double
+    
+    printf("String \"%s\" → int %d\n", angka_str, angka);
+    printf("String \"%s\" → double %.2f\n", desimal_str, desimal);
+    
+    /**
+     * ============================================
+     * TOKENIZATION (STRTOK)
+     * ============================================
+     */
+    printf("\n=== TOKENIZATION ===\n");
+    
+    char data[] = "Budi,17,Jakarta,Siswa";
+    char *token = strtok(data, ",");
+    
+    while(token != NULL) {
+        printf("Token: %s\n", token);
+        token = strtok(NULL, ",");
+    }
+    
+    return 0;
+}
+```
+
+---
+
+# 8. LIBRARY C LENGKAP
+
+## 📚 DAFTAR LIBRARY STANDAR C
+
+```c
+/**
+ * ============================================
+ * 1. STDIO.H - STANDARD INPUT OUTPUT
+ * ============================================
+ * Fungsi untuk input/output, file handling
+ */
+#include <stdio.h>
+// printf()    : output ke layar
+// scanf()     : input dari keyboard
+// fgets()     : baca string (aman)
+// puts()      : output string + newline
+// fopen()     : buka file
+// fclose()    : tutup file
+// fread()     : baca dari file
+// fwrite()    : tulis ke file
+// fprintf()   : printf ke file
+// fscanf()    : scanf dari file
+
+/**
+ * ============================================
+ * 2. STDLIB.H - STANDARD LIBRARY
+ * ============================================
+ * Fungsi umum, alokasi memori, konversi
+ */
+#include <stdlib.h>
+// malloc()    : alokasi memori
+// calloc()    : alokasi + set 0
+// realloc()   : ubah ukuran memori
+// free()      : bebaskan memori
+// rand()      : random number
+// srand()     : seed untuk random
+// atoi()      : string → int
+// atof()      : string → double
+// exit()      : keluar program
+// system()    : jalankan perintah OS
+// qsort()     : sorting array
+// abs()       : nilai mutlak int
+
+/**
+ * ============================================
+ * 3. STRING.H - STRING HANDLING
+ * ============================================
+ * Fungsi untuk manipulasi string
+ */
+#include <string.h>
+// strlen()    : panjang string
+// strcpy()    : copy string
+// strncpy()   : copy dengan batas
+// strcat()    : gabung string
+// strncat()   : gabung dengan batas
+// strcmp()    : bandingkan string
+// strncmp()   : bandingkan n karakter
+// strchr()    : cari karakter
+// strrchr()   : cari dari kanan
+// strstr()    : cari substring
+// strtok()    : tokenisasi
+// strcspn()   : cari karakter pertama
+
+/**
+ * ============================================
+ * 4. MATH.H - MATHEMATICS
+ * ============================================
+ * Fungsi matematika (compile dengan -lm)
+ */
+#include <math.h>
+// sqrt()      : akar kuadrat
+// pow()       : pangkat
+// sin()       : sinus (radian)
+// cos()       : cosinus (radian)
+// tan()       : tangen (radian)
+// asin()      : arcsin
+// acos()      : arccos
+// atan()      : arctan
+// log()       : logaritma natural
+// log10()     : logaritma basis 10
+// exp()       : e pangkat x
+// fabs()      : nilai mutlak float
+// ceil()      : pembulatan ke atas
+// floor()     : pembulatan ke bawah
+// round()     : pembulatan terdekat
+
+/**
+ * ============================================
+ * 5. CTYPE.H - CHARACTER HANDLING
+ * ============================================
+ * Fungsi untuk memeriksa dan mengubah karakter
+ */
+#include <ctype.h>
+// isalpha()   : apakah huruf?
+// isdigit()   : apakah angka?
+// isalnum()   : apakah huruf/angka?
+// islower()   : apakah huruf kecil?
+// isupper()   : apakah huruf besar?
+// isspace()   : apakah spasi?
+// ispunct()   : apakah tanda baca?
+// isprint()   : apakah bisa dicetak?
+// iscntrl()   : apakah control char?
+// tolower()   : ubah ke huruf kecil
+// toupper()   : ubah ke huruf besar
+
+/**
+ * ============================================
+ * 6. TIME.H - TIME AND DATE
+ * ============================================
+ * Fungsi untuk waktu dan tanggal
+ */
+#include <time.h>
+// time()      : waktu sekarang (detik)
+// ctime()     : konversi ke string
+// localtime() : ke struktur waktu lokal
+// gmtime()    : ke struktur waktu GMT
+// strftime()  : format waktu kustom
+// difftime()  : selisih waktu
+// clock()     : waktu proses
+// mktime()    : struct tm → time_t
+// sleep()     : delay (detik) - butuh unistd.h
+
+/**
+ * ============================================
+ * 7. LIMITS.H - INTEGER LIMITS
+ * ============================================
+ * Batas-batas tipe data integer
+ */
+#include <limits.h>
+// CHAR_BIT    : bit per byte
+// CHAR_MIN    : min char
+// CHAR_MAX    : max char
+// INT_MIN     : min int
+// INT_MAX     : max int
+// UINT_MAX    : max unsigned int
+// LONG_MIN    : min long
+// LONG_MAX    : max long
+
+/**
+ * ============================================
+ * 8. FLOAT.H - FLOAT LIMITS
+ * ============================================
+ * Batas-batas tipe data float
+ */
+#include <float.h>
+// FLT_MIN     : min float positif
+// FLT_MAX     : max float
+// FLT_DIG     : digit desimal presisi
+// DBL_MIN     : min double
+// DBL_MAX     : max double
+
+/**
+ * ============================================
+ * 9. STDARG.H - VARIABLE ARGUMENTS
+ * ============================================
+ * Fungsi dengan jumlah argumen tidak tetap
+ */
+#include <stdarg.h>
+// va_list     : tipe untuk argumen
+// va_start()  : mulai baca argumen
+// va_arg()    : ambil argumen
+// va_end()    : selesai baca argumen
+
+/**
+ * ============================================
+ * 10. SETJMP.H - NON-LOCAL JUMPS
+ * ============================================
+ * Untuk error handling tingkat lanjut
+ */
+#include <setjmp.h>
+// jmp_buf     : buffer untuk jump
+// setjmp()    : set jump point
+// longjmp()   : lompat ke setjmp
+
+/**
+ * ============================================
+ * 11. SIGNAL.H - SIGNAL HANDLING
+ * ============================================
+ * Menangani sinyal (interrupt, error)
+ */
+#include <signal.h>
+// signal()    : pasang handler sinyal
+// raise()     : kirim sinyal
+
+/**
+ * ============================================
+ * 12. ERRNO.H - ERROR NUMBERS
+ * ============================================
+ * Kode error untuk fungsi sistem
+ */
+#include <errno.h>
+// errno       : variabel error terakhir
+// perror()    : tampilkan pesan error
+```
+
+---
+
+# 9. MEMORY MANAGEMENT
+
+## 💾 MANAJEMEN MEMORI DI C
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    /**
+     * ============================================
+     * MEMORI STATIS vs DINAMIS
+     * ============================================
+     * 
+     * MEMORI STATIS:
+     * - Ukuran ditentukan saat kompilasi
+     * - Dialokasikan di stack
+     * - Otomatis dibebaskan
+     * 
+     * MEMORI DINAMIS:
+     * - Ukuran ditentukan saat runtime
+     * - Dialokasikan di heap
+     * - HARUS dibebaskan manual (free)
+     */
+    
+    /**
+     * ============================================
+     * MALLOC() - MEMORY ALLOCATION
+     * ============================================
+     * Mengalokasikan memori sebesar n byte
+     * Nilai awal acak (tidak diinisialisasi)
+     */
+    printf("=== MALLOC ===\n");
+    
+    int *arr1 = (int*)malloc(5 * sizeof(int));
+    
+    if(arr1 == NULL) {
+        printf("Alokasi memori gagal!\n");
+        return 1;
+    }
+    
+    // Isi array (nilai acak!)
+    for(int i = 0; i < 5; i++) {
+        printf("arr1[%d] = %d\n", i, arr1[i]);  // Nilai acak!
+    }
+    
+    /**
+     * ============================================
+     * CALLOC() - CONTIGUOUS ALLOCATION
+     * ============================================
+     * Mengalokasikan memori + set ke 0
+     */
+    printf("\n=== CALLOC ===\n");
+    
+    int *arr2 = (int*)calloc(5, sizeof(int));
+    
+    if(arr2 == NULL) {
+        printf("Alokasi memori gagal!\n");
+        free(arr1);
+        return 1;
+    }
+    
+    // Isi array (semua 0!)
+    for(int i = 0; i < 5; i++) {
+        printf("arr2[%d] = %d\n", i, arr2[i]);  // Semua 0
+    }
+    
+    /**
+     * ============================================
+     * REALLOC() - RE-ALLOCATION
+     * ============================================
+     * Mengubah ukuran memori yang sudah dialokasi
+     */
+    printf("\n=== REALLOC ===\n");
+    
+    arr1 = (int*)realloc(arr1, 10 * sizeof(int));
+    
+    if(arr1 == NULL) {
+        printf("Realokasi gagal!\n");
+        free(arr2);
+        return 1;
+    }
+    
+    printf("Ukuran baru: 10 integer\n");
+    
+    /**
+     * ============================================
+     * FREE() - MEMBEBASKAN MEMORI
+     * ============================================
+     * WAJIB! Mencegah memory leak
+     */
+    free(arr1);
+    free(arr2);
+    
+    // Set ke NULL setelah di-free
+    arr1 = NULL;
+    arr2 = NULL;
+    
+    printf("\n✅ Memori berhasil dibebaskan\n");
+    
+    /**
+     * ============================================
+     * MEMORY LEAK - YANG HARUS DIHINDARI!
+     * ============================================
+     */
+    
+    // ❌ CONTOH MEMORY LEAK
+    void memory_leak() {
+        int *leak = (int*)malloc(100 * sizeof(int));
+        // Lupa free() -> memory leak!
+    }
+    
+    // ✅ YANG BENAR
+    void no_leak() {
+        int *data = (int*)malloc(100 * sizeof(int));
+        // Gunakan data...
+        free(data);  // Bebaskan setelah selesai
+    }
+    
+    /**
+     * ============================================
+     * DANGLING POINTER
+     * ============================================
+     * Pointer yang menunjuk ke memori yang sudah di-free
+     */
+    int *ptr = (int*)malloc(sizeof(int));
+    *ptr = 10;
+    free(ptr);
+    
+    // ❌ JANGAN LAKUKAN!
+    // *ptr = 20;  // Undefined behavior! Bisa crash
+    
+    // ✅ SET KE NULL
+    ptr = NULL;  // Aman
+    
+    return 0;
+}
+```
+
+---
+
+# 10. ERROR DAN DEBUGGING
+
+## ⚠️ ERROR YANG SERING TERJADI
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ * ============================================
+ * 1. SEGMENTATION FAULT (SEGFAULT)
+ * ============================================
+ * Terjadi saat program mengakses memori yang tidak seharusnya
+ */
+void contoh_segfault() {
+    printf("\n=== CONTOH SEGFAULT ===\n");
+    
+    // ❌ 1. NULL pointer dereference
+    int *ptr = NULL;
+    // *ptr = 10;  // SEGFAULT! Jangan jalankan
+    
+    // ❌ 2. Mengakses di luar array
+    int arr[5] = {1,2,3,4,5};
+    // arr[10] = 100;  // SEGFAULT! Index tidak valid
+    
+    // ❌ 3. Menggunakan memory yang sudah di-free
+    int *data = (int*)malloc(10 * sizeof(int));
+    free(data);
+    // data[0] = 5;  // SEGFAULT! Memory sudah dilepas
+    
+    // ✅ Cara aman
+    int *safe = (int*)malloc(sizeof(int));
+    if(safe != NULL) {
+        *safe = 10;
+        printf("Nilai: %d\n", *safe);
+        free(safe);
+        safe = NULL;
+    }
+}
+
+/**
+ * ============================================
+ * 2. BUFFER OVERFLOW
+ * ============================================
+ * Menulis data melebihi kapasitas array
+ */
+void contoh_buffer_overflow() {
+    printf("\n=== CONTOH BUFFER OVERFLOW ===\n");
+    
+    // ❌ TIDAK AMAN
+    char buffer1[5];
+    // strcpy(buffer1, "Ini string panjang");  // OVERFLOW!
+    
+    // ✅ AMAN dengan fgets
+    char buffer2[10];
+    printf("Masukkan teks (maks 9 char): ");
+    fgets(buffer2, sizeof(buffer2), stdin);
+    
+    // ✅ AMAN dengan strncpy
+    char source[] = "Hello World";
+    char dest[10];
+    strncpy(dest, source, sizeof(dest) - 1);
+    dest[sizeof(dest) - 1] = '\0';  // Pastikan null terminated
+}
+
+/**
+ * ============================================
+ * 3. INTEGER OVERFLOW
+ * ============================================
+ * Melebihi batas maksimum tipe data
+ */
+void contoh_integer_overflow() {
+    printf("\n=== CONTOH INTEGER OVERFLOW ===\n");
+    
+    unsigned char uc = 255;
+    printf("unsigned char: %d\n", uc);
+    uc = uc + 1;
+    printf("+1 menjadi: %d (overflow!)\n", uc);
+    
+    signed char sc = 127;
+    printf("signed char: %d\n", sc);
+    sc = sc + 1;
+    printf("+1 menjadi: %d (overflow ke negatif)\n", sc);
+}
+
+/**
+ * ============================================
+ * 4. DIVISION BY ZERO
+ * ============================================
+ * Membagi bilangan dengan nol
+ */
+void contoh_division_by_zero() {
+    printf("\n=== CONTOH DIVISION BY ZERO ===\n");
+    
+    int a = 10, b = 0;
+    
+    // ❌ JANGAN!
+    // int c = a / b;  // ERROR! Program crash
+    
+    // ✅ Validasi dulu
+    if(b != 0) {
+        int c = a / b;
+        printf("Hasil: %d\n", c);
+    } else {
+        printf("Error: Pembagian dengan nol!\n");
+    }
+}
+
+/**
+ * ============================================
+ * 5. UNINITIALIZED VARIABLE
+ * ============================================
+ * Menggunakan variabel tanpa inisialisasi
+ */
+void contoh_uninitialized() {
+    printf("\n=== CONTOH UNINITIALIZED ===\n");
+    
+    // ❌ BELUM DIISI
+    int x;
+    // printf("%d\n", x);  // Nilai acak! Bisa error
+    
+    // ✅ Selalu inisialisasi
+    int y = 0;
+    printf("y = %d\n", y);
+}
+
+/**
+ * ============================================
+ * 6. MEMORY LEAK
+ * ============================================
+ * Lupa membebaskan memori
+ */
+void contoh_memory_leak() {
+    printf("\n=== CONTOH MEMORY LEAK ===\n");
+    
+    // ❌ Memory leak
+    for(int i = 0; i < 10; i++) {
+        int *leak = (int*)malloc(1000 * sizeof(int));
+        // Lupa free! Memori habis
+    }
+    
+    // ✅ Bebaskan memori
+    for(int i = 0; i < 10; i++) {
+        int *data = (int*)malloc(1000 * sizeof(int));
+        // Gunakan data...
+        free(data);  // Jangan lupa!
+    }
+}
+
+int main() {
+    printf("=== DEMONSTRASI ERROR DAN DEBUGGING ===\n");
+    
+    contoh_segfault();
+    contoh_buffer_overflow();
+    contoh_integer_overflow();
+    contoh_division_by_zero();
+    contoh_uninitialized();
+    contoh_memory_leak();
+    
+    return 0;
+}
+```
+
+---
+
+# 11. TIPS DAN TRIK
+
+## 💡 BEST PRACTICES DI C
+
+```c
+/**
+ * ============================================
+ * TIPS 1: SELALU VALIDASI INPUT
+ * ============================================
+ */
+#include <stdio.h>
+
+void tips_validasi_input() {
+    int angka;
+    char buffer[100];
+    
+    printf("Masukkan angka: ");
+    fgets(buffer, sizeof(buffer), stdin);
+    
+    // Cek apakah input valid
+    char *endptr;
+    angka = strtol(buffer, &endptr, 10);
+    
+    if(*endptr != '\n' && *endptr != '\0') {
+        printf("Input tidak valid!\n");
+    } else {
+        printf("Angka: %d\n", angka);
+    }
+}
+
+/**
+ * ============================================
+ * TIPS 2: GUNAKAN FUNGSI AMAN
+ * ============================================
+ */
+void tips_fungsi_aman() {
+    char nama[20];
+    
+    // ❌ TIDAK AMAN
+    // gets(nama);  // JANGAN GUNAKAN!
+    // scanf("%s", nama);  // Rawan overflow
+    
+    // ✅ AMAN
+    fgets(nama, sizeof(nama), stdin);
+    nama[strcspn(nama, "\n")] = 0;  // Buang newline
+}
+
+/**
+ * ============================================
+ * TIPS 3: CEK BATAS ARRAY
+ * ============================================
+ */
+void tips_batas_array() {
+    int arr[10];
+    
+    // ✅ Selalu cek batas
+    for(int i = 0; i < 10; i++) {  // Gunakan <, bukan <=
+        arr[i] = i;
+    }
+    
+    // ❌ JANGAN
+    // for(int i = 0; i <= 10; i++) {  // arr[10] out of bounds!
+    //     arr[i] = i;
+    // }
+}
+
+/**
+ * ============================================
+ * TIPS 4: SELALU INISIALISASI VARIABEL
+ * ============================================
+ */
+void tips_inisialisasi() {
+    // ✅ Inisialisasi langsung
+    int angka = 0;
+    char huruf = '\0';
+    int *ptr = NULL;
+    
+    // ❌ JANGAN
+    // int x;  // Nilai acak!
+}
+
+/**
+ * ============================================
+ * TIPS 5: CEK HASIL MALLOC
+ * ============================================
+ */
+void tips_cek_malloc() {
+    int *data = (int*)malloc(100 * sizeof(int));
+    
+    if(data == NULL) {
+        printf("Alokasi memori gagal!\n");
+        return;
+    }
+    
+    // Gunakan data...
+    
+    free(data);
+    data = NULL;  // Hindari dangling pointer
+}
+
+/**
+ * ============================================
+ * TIPS 6: DEBUG DENGAN PRINTF
+ * ============================================
+ */
+void tips_debug() {
+    int x = 5, y = 10;
+    
+    printf("DEBUG: x = %d, y = %d\n", x, y);
+    
+    int hasil = x * y;
+    printf("DEBUG: hasil = %d\n", hasil);
+}
+
+/**
+ * ============================================
+ * TIPS 7: GUNAKAN KONSTANTA
+ * ============================================
+ */
+#define MAX_SISWA 100
+#define PI 3.14159
+
+const int MAX_UMUR = 17;
+
+/**
+ * ============================================
+ * TIPS 8: BERI NAMA VARIABEL YANG JELAS
+ * ============================================
+ */
+// ❌ BURUK
+int a, b, c;
+
+// ✅ BAIK
+int jumlah_siswa;
+float rata_rata_nilai;
+char nama_mahasiswa[50];
+```
+
+---
+
+# 12. CONTOH PROGRAM LENGKAP
+
+## 🎮 PROGRAM MANAJEMEN DATA MAHASISWA
+
+```c
+/**
+ * ============================================
+ * PROGRAM: SISTEM MANAJEMEN DATA MAHASISWA
+ * ============================================
+ * Menggabungkan semua konsep:
+ * - Array, struct, pointer
+ * - Dynamic memory allocation
+ * - File I/O
+ * - Error handling
+ * - String manipulation
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Struktur data mahasiswa
+typedef struct {
+    int id;
+    char nama[50];
+    char nim[15];
+    float ipk;
+    int aktif;  // 1 = aktif, 0 = tidak
+} Mahasiswa;
+
+// Prototipe fungsi
+void tambah_mahasiswa(Mahasiswa **mhs, int *jumlah, int *kapasitas);
+void tampilkan_semua(Mahasiswa *mhs, int jumlah);
+void cari_mahasiswa(Mahasiswa *mhs, int jumlah);
+void hapus_mahasiswa(Mahasiswa *mhs, int *jumlah);
+void urutkan_mahasiswa(Mahasiswa *mhs, int jumlah);
+void statistik_mahasiswa(Mahasiswa *mhs, int jumlah);
+void simpan_ke_file(Mahasiswa *mhs, int jumlah);
+void baca_dari_file(Mahasiswa **mhs, int *jumlah, int *kapasitas);
+void tampilkan_menu();
+
+// Fungsi pembanding untuk sorting
+int compare_ipk(const void *a, const void *b) {
+    Mahasiswa *m1 = (Mahasiswa*)a;
+    Mahasiswa *m2 = (Mahasiswa*)b;
+    
+    if(m1->ipk < m2->ipk) return 1;
+    if(m1->ipk > m2->ipk) return -1;
+    return 0;
+}
+
+int main() {
+    Mahasiswa *daftar_mhs = NULL;
+    int jumlah = 0;
+    int kapasitas = 0;
+    int pilihan;
+    
+    printf("╔════════════════════════════════╗\n");
+    printf("║   SISTEM MANAJEMEN MAHASISWA  ║\n");
+    printf("║         Versi 1.0              ║\n");
+    printf("╚════════════════════════════════╝\n\n");
+    
+    // Coba baca dari file
+    baca_dari_file(&daftar_mhs, &jumlah, &kapasitas);
+    
+    do {
+        tampilkan_menu();
+        printf("Pilihan: ");
+        
+        // Validasi input menu
+        if(scanf("%d", &pilihan) != 1) {
+            printf("❌ Input tidak valid!\n");
+            while(getchar() != '\n');
+            continue;
+        }
+        while(getchar() != '\n');
+        
+        switch(pilihan) {
+            case 1:
+                tambah_mahasiswa(&daftar_mhs, &jumlah, &kapasitas);
+                break;
+            case 2:
+                tampilkan_semua(daftar_mhs, jumlah);
+                break;
+            case 3:
+                cari_mahasiswa(daftar_mhs, jumlah);
+                break;
+            case 4:
+                hapus_mahasiswa(daftar_mhs, &jumlah);
+                break;
+            case 5:
+                urutkan_mahasiswa(daftar_mhs, jumlah);
+                break;
+            case 6:
+                statistik_mahasiswa(daftar_mhs, jumlah);
+                break;
+            case 7:
+                simpan_ke_file(daftar_mhs, jumlah);
+                break;
+            case 0:
+                printf("\nTerima kasih!\n");
+                simpan_ke_file(daftar_mhs, jumlah);
+                free(daftar_mhs);
+                break;
+            default:
+                printf("❌ Pilihan tidak valid!\n");
+        }
+        
+        printf("\n");
+        
+    } while(pilihan != 0);
+    
+    return 0;
+}
+
+void tampilkan_menu() {
+    printf("\n=== MENU UTAMA ===\n");
+    printf("1. Tambah Mahasiswa\n");
+    printf("2. Tampilkan Semua\n");
+    printf("3. Cari Mahasiswa\n");
+    printf("4. Hapus Mahasiswa\n");
+    printf("5. Urutkan (by IPK)\n");
+    printf("6. Statistik\n");
+    printf("7. Simpan ke File\n");
+    printf("0. Keluar\n");
+}
+
+void tambah_mahasiswa(Mahasiswa **mhs, int *jumlah, int *kapasitas) {
+    // Alokasi memori jika perlu
+    if(*jumlah >= *kapasitas) {
+        *kapasitas = (*kapasitas == 0) ? 5 : *kapasitas * 2;
+        *mhs = (Mahasiswa*)realloc(*mhs, *kapasitas * sizeof(Mahasiswa));
+        
+        if(*mhs == NULL) {
+            printf("❌ Gagal alokasi memori!\n");
+            return;
+        }
+    }
+    
+    Mahasiswa *m = &(*mhs)[*jumlah];
+    
+    printf("\n=== TAMBAH MAHASISWA ===\n");
+    
+    m->id = *jumlah + 1;
+    
+    printf("Nama: ");
+    fgets(m->nama, sizeof(m->nama), stdin);
+    m->nama[strcspn(m->nama, "\n")] = 0;
+    
+    printf("NIM: ");
+    fgets(m->nim, sizeof(m->nim), stdin);
+    m->nim[strcspn(m->nim, "\n")] = 0;
+    
+    printf("IPK: ");
+    char buffer[10];
+    fgets(buffer, sizeof(buffer), stdin);
+    m->ipk = atof(buffer);
+    
+    m->aktif = 1;
+    
+    (*jumlah)++;
+    printf("✅ Mahasiswa berhasil ditambahkan!\n");
+}
+
+void tampilkan_semua(Mahasiswa *mhs, int jumlah) {
+    if(jumlah == 0) {
+        printf("Belum ada data mahasiswa.\n");
+        return;
+    }
+    
+    printf("\n=== DAFTAR MAHASISWA ===\n");
+    printf("+------+--------------------+------------+------+--------+\n");
+    printf("| %-4s | %-18s | %-10s | %-4s | %-6s |\n", 
+           "ID", "Nama", "NIM", "IPK", "Status");
+    printf("+------+--------------------+------------+------+--------+\n");
+    
+    for(int i = 0; i < jumlah; i++) {
+        if(mhs[i].aktif) {
+            printf("| %-4d | %-18s | %-10s | %-4.2f | %-6s |\n",
+                   mhs[i].id,
+                   mhs[i].nama,
+                   mhs[i].nim,
+                   mhs[i].ipk,
+                   mhs[i].aktif ? "Aktif" : "Nonaktif");
+        }
+    }
+    printf("+------+--------------------+------------+------+--------+\n");
+}
+
+void cari_mahasiswa(Mahasiswa *mhs, int jumlah) {
+    if(jumlah == 0) {
+        printf("Belum ada data.\n");
+        return;
+    }
+    
+    char keyword[50];
+    printf("Masukkan nama/NIM: ");
+    fgets(keyword, sizeof(keyword), stdin);
+    keyword[strcspn(keyword, "\n")] = 0;
+    
+    printf("\nHasil pencarian:\n");
+    int ditemukan = 0;
+    
+    for(int i = 0; i < jumlah; i++) {
+        if((strstr(mhs[i].nama, keyword) != NULL || 
+            strstr(mhs[i].nim, keyword) != NULL) && mhs[i].aktif) {
+            printf("ID   : %d\n", mhs[i].id);
+            printf("Nama : %s\n", mhs[i].nama);
+            printf("NIM  : %s\n", mhs[i].nim);
+            printf("IPK  : %.2f\n", mhs[i].ipk);
+            printf("-------------------\n");
+            ditemukan = 1;
+        }
+    }
+    
+    if(!ditemukan) {
+        printf("Tidak ditemukan.\n");
+    }
+}
+
+void hapus_mahasiswa(Mahasiswa *mhs, int *jumlah) {
+    if(*jumlah == 0) {
+        printf("Belum ada data.\n");
+        return;
+    }
+    
+    int id;
+    printf("Masukkan ID: ");
+    scanf("%d", &id);
+    while(getchar() != '\n');
+    
+    for(int i = 0; i < *jumlah; i++) {
+        if(mhs[i].id == id) {
+            // Soft delete
+            mhs[i].aktif = 0;
+            printf("✅ Mahasiswa dinonaktifkan.\n");
+            return;
+        }
+    }
+    
+    printf("❌ ID tidak ditemukan.\n");
+}
+
+void urutkan_mahasiswa(Mahasiswa *mhs, int jumlah) {
+    if(jumlah == 0) {
+        printf("Belum ada data.\n");
+        return;
+    }
+    
+    qsort(mhs, jumlah, sizeof(Mahasiswa), compare_ipk);
+    printf("✅ Data diurutkan berdasarkan IPK.\n");
+    tampilkan_semua(mhs, jumlah);
+}
+
+void statistik_mahasiswa(Mahasiswa *mhs, int jumlah) {
+    if(jumlah == 0) {
+        printf("Belum ada data.\n");
+        return;
+    }
+    
+    int aktif = 0;
+    float total_ipk = 0;
+    float max_ipk = 0, min_ipk = 4.0;
+    char *nama_max = "", *nama_min = "";
+    
+    for(int i = 0; i < jumlah; i++) {
+        if(mhs[i].aktif) {
+            aktif++;
+            total_ipk += mhs[i].ipk;
+            
+            if(mhs[i].ipk > max_ipk) {
+                max_ipk = mhs[i].ipk;
+                nama_max = mhs[i].nama;
+            }
+            if(mhs[i].ipk < min_ipk) {
+                min_ipk = mhs[i].ipk;
+                nama_min = mhs[i].nama;
+            }
+        }
+    }
+    
+    printf("\n=== STATISTIK ===\n");
+    printf("Total mahasiswa : %d\n", jumlah);
+    printf("Mahasiswa aktif : %d\n", aktif);
+    printf("Mahasiswa nonaktif: %d\n", jumlah - aktif);
+    
+    if(aktif > 0) {
+        printf("Rata-rata IPK   : %.2f\n", total_ipk / aktif);
+        printf("IPK Tertinggi   : %.2f (%s)\n", max_ipk, nama_max);
+        printf("IPK Terendah    : %.2f (%s)\n", min_ipk, nama_min);
+    }
+}
+
+void simpan_ke_file(Mahasiswa *mhs, int jumlah) {
+    FILE *file = fopen("mahasiswa.dat", "wb");
+    
+    if(file == NULL) {
+        printf("❌ Gagal membuka file!\n");
+        return;
+    }
+    
+    fwrite(&jumlah, sizeof(int), 1, file);
+    fwrite(mhs, sizeof(Mahasiswa), jumlah, file);
+    
+    fclose(file);
+    printf("✅ Data disimpan ke mahasiswa.dat\n");
+}
+
+void baca_dari_file(Mahasiswa **mhs, int *jumlah, int *kapasitas) {
+    FILE *file = fopen("mahasiswa.dat", "rb");
+    
+    if(file == NULL) {
+        printf("ℹ️ File tidak ditemukan. Memulai dengan data kosong.\n");
+        return;
+    }
+    
+    fread(jumlah, sizeof(int), 1, file);
+    
+    *kapasitas = *jumlah;
+    *mhs = (Mahasiswa*)malloc(*kapasitas * sizeof(Mahasiswa));
+    
+    if(*mhs == NULL) {
+        printf("❌ Gagal alokasi memori!\n");
+        fclose(file);
+        return;
+    }
+    
+    fread(*mhs, sizeof(Mahasiswa), *jumlah, file);
+    fclose(file);
+    
+    printf("✅ Data berhasil dibaca. (%d mahasiswa)\n", *jumlah);
+}
+```
+
+---
+
+# 📌 RINGKASAN
+
+## ✅ HAL PENTING YANG HARUS DIINGAT:
+
+1. **Selalu inisialisasi variabel** sebelum digunakan
+2. **Cek batas array** untuk mencegah buffer overflow
+3. **Gunakan fgets()** bukan scanf() untuk string
+4. **Buang newline** setelah fgets() dengan strcspn()
+5. **Cek hasil malloc()** apakah berhasil
+6. **free() memory** yang dialokasi dengan malloc/calloc
+7. **Set pointer ke NULL** setelah di-free
+8. **Validasi input** sebelum diproses
+9. **Gunakan konstanta** untuk nilai tetap
+10. **Beri nama variabel** yang jelas dan bermakna
+
+## ❌ YANG TIDAK BOLEH DILAKUKAN:
+
+1. ❌ Menggunakan gets() - Rawan buffer overflow
+2. ❌ Mengakses array di luar batas
+3. ❌ Menggunakan pointer tanpa inisialisasi
+4. ❌ Melupakan null terminator pada string
+5. ❌ Membandingkan string dengan == (pakai strcmp!)
+6. ❌ Lupa free() memory - Memory leak
+7. ❌ Mengakses memory yang sudah di-free - Dangling pointer
+8. ❌ Membagi dengan nol
+9. ❌ Mengabaikan return value fungsi
+10. ❌ Menggunakan scanf("%s") tanpa batasan
+
+---
+
+## 📚 SUMBER BELAJAR LANJUTAN
+
+- **W3Schools** - Tutorial dasar C
+- **freeCodeCamp** - Project-based learning
+- **Stack Overflow** - Diskusi error
+- **GitHub** - Source code contoh
+- **Dokumentasi GNU C Library** - Referensi lengkap
+
+---
+
+**Selamat belajar! Semoga sukses menjadi programmer handal!** 🚀
+
+*Dokumentasi ini dibuat untuk keperluan belajar mandiri.*
+*Last Updated: 2026*
